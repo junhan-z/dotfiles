@@ -5,6 +5,7 @@ endif
 
 source ~/.vim/configs/appearance.vim
 source ~/.vim/configs/editing.vim
+source ~/.vim/configs/plugins.vim
 
 set history=1000
 set autoread " autoload files after edit
