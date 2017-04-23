@@ -1,0 +1,5 @@
+**/classes
+.gitignore
+.DS_Store
+**/*.swp
+!~/.gitignore
