@@ -1,3 +1,8 @@
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
 source ~/.vim/configs/appearance.vim
 source ~/.vim/configs/editing.vim
 
