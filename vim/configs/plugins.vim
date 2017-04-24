@@ -7,4 +7,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 
+
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx'] }
 call plug#end()
