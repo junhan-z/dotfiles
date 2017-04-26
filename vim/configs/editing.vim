@@ -51,10 +51,6 @@ imap <C-d> <Del>
 imap <C-h> <BS>
 imap jj <ESC>
 
-cmap <C-p> <Up>
-cmap <C-n> <Down>
-cmap <C-b> <Left>
-cmap <C-f> <Right>
 cmap <C-a> <Home>
 cmap <C-e> <End>
 
