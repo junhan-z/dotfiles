@@ -30,7 +30,9 @@ set splitbelow "put :sp to the bottom of the current
 set path+=**
 set wildmenu
 
-:set noswapfile
+set noswapfile
+
+set mouse=a "scroll vim in terminal
 
 "--------------------------------------------------------------------
 " key bindings
