@@ -11,18 +11,25 @@ set nowrap " don't wrap line
 set foldenable
 set foldlevel=99
 
-set smartindent
-set autoindent
-
 set expandtab
 set shiftwidth=2
 set softtabstop=2
+set tabstop=2
 
 set ignorecase " ignore case in search
 set smartcase
 
 autocmd FileType python,coffee set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType haskell,puppet,ruby,html,css,xml,js set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd FileType haskell,puppet,ruby,php,html,css,xml,js set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+
+"autoindent essentially tells vim to apply the indentation of the current line
+"to the next (created by pressing enter in insert mode or with O or o in
+"normal mode.
+"
+"smartindent reacts to the syntax/style of the code you are editing
+"(especially for C). When having it on you also should have autoindent on.
+set autoindent
+set smartindent
 
 set splitright "put to the right of the current
 set splitbelow "put :sp to the bottom of the current
