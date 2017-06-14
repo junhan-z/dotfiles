@@ -4,6 +4,14 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+"Swag
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme='jellybeans'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
 " Javascripts
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
@@ -20,6 +28,9 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Edit Nav
 Plug 'terryma/vim-multiple-cursors'
+
+" 对齐
+Plug 'junegunn/vim-easy-align'
 
 " File Nav
 Plug 'Xuyuanp/nerdtree-git-plugin'
