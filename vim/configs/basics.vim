@@ -103,6 +103,3 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " quick save
 map <Esc><Esc> :w<CR>
-
-" enter new line without entering insert mode
-nmap <CR> o<Esc>

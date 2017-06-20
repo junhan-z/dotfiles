@@ -3,6 +3,7 @@ if empty(glob("~/.vim/autoload/plug.vim"))
     execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
+source ~/nahnuj/work_config.vim
 source ~/.vim/configs/basics.vim
 source ~/.vim/configs/plugins.vim
 
@@ -13,6 +14,9 @@ set viminfo^=% " remember last time edit place
 
 "
 syntax on
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "--------------Auto load after save------------------------------------
 autocmd! bufwritepost .vimrc source %
