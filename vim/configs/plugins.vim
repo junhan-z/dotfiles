@@ -58,5 +58,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
+Plug 'hhvm/vim-hack'
+
 call plug#end()
 
