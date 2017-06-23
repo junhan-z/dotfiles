@@ -17,7 +17,7 @@ Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 
 " HTML
-Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx'] }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'php'] }
 
 " CSS
 Plug 'hail2u/vim-css3-syntax' 
@@ -59,6 +59,5 @@ if executable('ag')
 endif
 
 Plug 'hhvm/vim-hack'
-
 call plug#end()
 

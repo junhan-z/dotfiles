@@ -46,15 +46,12 @@ set foldenable
 set foldlevel=99
 
 set expandtab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
 
 set ignorecase " ignore case in search
 set smartcase
 
 autocmd FileType python,coffee set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType haskell,puppet,ruby,php,html,css,xml,js set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd FileType haskell,puppet,ruby,php,html,css,xml,js set tabstop=2 shiftwidth=2 expandtab ai
 
 "autoindent essentially tells vim to apply the indentation of the current line
 "to the next (created by pressing enter in insert mode or with O or o in
@@ -75,6 +72,9 @@ set noswapfile
 
 set mouse=a "scroll vim in terminal
 
+" for trailing and spaces
+set list
+set lcs=tab:»-,eol:$,space:·,nbsp:%,trail:~,precedes:«
 "--------------------------------------------------------------------
 " key bindings
 
@@ -100,6 +100,9 @@ cmap <C-e> <End>
 " yank to the end of the line
 nnoremap Y y$  
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" movements
+onoremap p i(
 
 " quick save
 map <Esc><Esc> :w<CR>
