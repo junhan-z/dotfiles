@@ -59,5 +59,6 @@ if executable('ag')
 endif
 
 Plug 'hhvm/vim-hack'
+Plug 'tpope/vim-surround'
 call plug#end()
 
