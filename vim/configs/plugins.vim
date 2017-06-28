@@ -60,5 +60,7 @@ endif
 
 Plug 'hhvm/vim-hack'
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/taglist.vim'
+nnoremap <leader>t :TlistToggle<cr>
 call plug#end()
 
