@@ -28,6 +28,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Edit Nav
 Plug 'terryma/vim-multiple-cursors'
+"Plug 'Valloric/YouCompleteMe', {'do': './install.py' }
 
 " 对齐
 Plug 'junegunn/vim-easy-align'
@@ -60,7 +61,13 @@ endif
 
 Plug 'hhvm/vim-hack'
 Plug 'tpope/vim-surround'
+
 Plug 'vim-scripts/taglist.vim'
 nnoremap <leader>t :TlistToggle<cr>
+let Tlist_Show_One_File=1 " always show taglist of one file
+let Tlist_Use_Right_Window = 1 " make tag list on the right
+let Tlist_WinWidth=40
+
+Plug 'vim-scripts/Visual-Mark'
 call plug#end()
 
