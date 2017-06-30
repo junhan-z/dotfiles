@@ -1,6 +1,12 @@
 "
 "----------------------------------------------------------------------
 " Basics 
+set nocompatible
+
+syntax on
+set history=1000
+set autoread " autoload files after edit
+set viminfo^=% " remember last time edit place
 "
 " Appearance
 colorscheme Tomorrow-Night-Eighties 

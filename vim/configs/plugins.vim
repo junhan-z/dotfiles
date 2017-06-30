@@ -65,9 +65,17 @@ Plug 'tpope/vim-surround'
 Plug 'vim-scripts/taglist.vim'
 nnoremap <leader>t :TlistToggle<cr>
 let Tlist_Show_One_File=1 " always show taglist of one file
-let Tlist_Use_Right_Window = 1 " make tag list on the right
+let Tlist_Use_Right_Window = 1 " make taglist on the right
 let Tlist_WinWidth=40
 
 Plug 'vim-scripts/Visual-Mark'
+Plug 'vim-scripts/ShowMarks'
+let showmarks_enable=1
+" Ignore help, quickfix, non-modifiable buffers
+let showmarks_ignore_type = "hqm"
+" Hilight lower & upper marks
+let showmarks_hlline_lower = 1
+let showmarks_hlline_upper = 1
+
 call plug#end()
 

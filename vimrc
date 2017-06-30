@@ -3,18 +3,16 @@ if empty(glob("~/.vim/autoload/plug.vim"))
     execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
+" atomake- prefix is for my personal machines
+if $HOSTNAME !~ '^[Aa]tomake.*'
+  echom join(['Work Mode!', 'import work configs for', $HOSTNAME],' ')
+  source ~/nahnuj/work_config.vim
+endif
+
 source ~/.vim/configs/basics.vim
 source ~/.vim/configs/plugins.vim
 
-set history=1000
-set autoread " autoload files after edit
-
-set viminfo^=% " remember last time edit place
-
-"
-syntax on
-
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "--------------Auto load after save------------------------------------
