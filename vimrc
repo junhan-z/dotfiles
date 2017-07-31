@@ -4,8 +4,9 @@ if empty(glob("~/.vim/autoload/plug.vim"))
 endif
 
 " atomake- prefix is for my personal machines
-if $HOSTNAME !~ '^[Aa]tomake.*'
-  echom join(['Work Mode!', 'import work configs for', $HOSTNAME],' ')
+let hostname=system('hostname -s')
+if hostname !~ '^[Aa]tomake.*'
+  echom join(['Work Mode!', 'import work configs for', hostname],' ')
   source ~/nahnuj/work_config.vim
 endif
 
