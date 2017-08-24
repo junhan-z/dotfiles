@@ -6,7 +6,7 @@ endif
 " atomake- prefix is for my personal machines
 let hostname=system('hostname -s')
 if hostname !~ '^[Aa]tomake.*'
-  echom join(['Work Mode!', 'import work configs for', hostname],' ')
+  echom join(['Work Mode! Import work configs for', hostname],' ')
   source ~/nahnuj/work_config.vim
 endif
 
