@@ -1,6 +1,14 @@
+if [[ -s "{$HOME}/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"]]; then
+  source "{$HOME}/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+
 # Keybindings
 bindkey -v
 export KEYTIMEOUT=1
+
+bindkey '^w' backward-kill-word
+bindkey '^d' delete-char
+bindkey '^k' kill-line
 
 bindkey '^p' up-history
 bindkey '^n' down-history
