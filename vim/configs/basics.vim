@@ -97,13 +97,6 @@ cnoremap <C-h> <BS>
 
 "eliminate the delay
 inoremap <special> <Esc> <Esc>hl
-
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
-inoremap <C-b> <Left>
-inoremap <C-f> <Right>
-inoremap <C-d> <Del
-inoremap <C-h> <BS>
 inoremap jj <ESC>
 
 " yank to the end of the line

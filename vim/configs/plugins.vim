@@ -32,6 +32,14 @@ Plug 'terryma/vim-multiple-cursors'
 
 " 对齐
 Plug 'junegunn/vim-easy-align'
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+"fuzzy serach"
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " File Nav
 Plug 'Xuyuanp/nerdtree-git-plugin'
