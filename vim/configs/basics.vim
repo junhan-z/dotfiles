@@ -22,6 +22,7 @@ set title " change the terminal title
 set guicursor+=i:blinkwait0
 set cursorline " highlight line
 set ruler
+set relativenumber
 set number
 
 set showmatch
