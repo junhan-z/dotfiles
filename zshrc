@@ -1,6 +1,13 @@
-if [[ -s "{$HOME}/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"]]; then
-  source "{$HOME}/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f  "{$HOME}/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] \
+  && source "{$HOME}/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+
+autoload -Uz promptinit
+promptinit
+prompt paradox
 
 # Keybindings
 bindkey -v
@@ -10,14 +17,18 @@ bindkey '^w' backward-kill-word
 bindkey '^d' delete-char
 bindkey '^k' kill-line
 
-bindkey '^p' up-history
-bindkey '^n' down-history
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 bindkey '^s' history-incremental-search-forward
+bindkey '^p' up-history
+bindkey '^n' down-history
 
 bindkey '^f' forward-char
 bindkey '^b' backward-char
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
+
+HOSTNAME=$(hostname)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
