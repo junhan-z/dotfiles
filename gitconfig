@@ -1,5 +1,3 @@
-[user]
-
 [core]
 	editor = vim
 	excludesfile = /Users/junhan/.gitignore_global
