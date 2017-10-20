@@ -40,6 +40,7 @@ set expandtab
 
 set ignorecase " ignore case in search
 set smartcase
+set nospell
 
 
 "autoindent essentially tells vim to apply the indentation of the current line

@@ -40,6 +40,9 @@ nmap ga <Plug>(EasyAlign)
 "fuzzy serach"
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+nmap ; :Buffers<CR>
+nmap <Leader>f :Files<CR>
+nmap <Leader>r :Tags<CR>
 
 " File Nav
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -47,18 +50,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_console_startup = 0
 
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
