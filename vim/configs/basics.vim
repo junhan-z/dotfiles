@@ -112,7 +112,7 @@ onoremap p i(
 map <Esc><Esc> :w<CR>
 
 "--------------------------------------------------------------------
-"Tricks
+" Tricks
 " Surround a word with ", ', (, [, {, <
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
@@ -120,3 +120,12 @@ nnoremap <leader>( viw<esc>a)<esc>hbi(<esc>lel
 nnoremap <leader>[ viw<esc>a]<esc>hbi[<esc>lel
 nnoremap <leader>{ viw<esc>a}<esc>hbi{<esc>lel
 nnoremap <leader>< viw<esc>a><esc>hbi<<esc>lel
+
+" Split and tabs
+"
+set splitbelow
+set splitright
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
