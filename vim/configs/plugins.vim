@@ -14,6 +14,7 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " Javascripts
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 
 " HTML
