@@ -70,6 +70,7 @@ set mouse=a "scroll vim in terminal
 " for trailing and spaces
 set list
 set lcs=tab:»-,eol:$,space:·,nbsp:%,trail:~,precedes:«
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 "--------------------------------------------------------------------
 "autocmds
