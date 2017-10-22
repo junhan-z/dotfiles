@@ -39,6 +39,9 @@ set foldenable
 set foldlevel=99
 
 set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 
 set ignorecase " ignore case in search
 set smartcase
