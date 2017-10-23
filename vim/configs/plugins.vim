@@ -29,7 +29,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Edit Nav
 Plug 'terryma/vim-multiple-cursors'
-"Plug 'Valloric/YouCompleteMe', {'do': './install.py' }
 
 " 对齐
 Plug 'junegunn/vim-easy-align'
@@ -50,6 +49,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " 保持nerdtree一致
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_console_startup = 0
+
+" Auto-Complete
+Plug 'Valloric/YouCompleteMe', {'do': './install.py' }
 
 " The Silver Searcher
 if executable('ag')
