@@ -5,7 +5,7 @@ set nocompatible
 
 syntax on
 set history=1000
-set autoread " autoload files after edit
+set autoread " autoload files after edit, but it doesnt check periodically
 set viminfo^=% " remember last time edit place
 
 " Appearance
@@ -134,3 +134,16 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Functions
+
+nnoremap <silent> <c-a> :call TogglePaste()<cr>
+function! TogglePaste()
+    if &paste ==# 0
+        execute "set paste"
+        echo "paste"
+    else
+        execute "set nopaste"
+        echo "nopaste"
+    endif
+endfunction
