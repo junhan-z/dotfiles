@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 "Swag
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='angr'
+let g:airline_theme='base16'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
