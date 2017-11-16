@@ -24,8 +24,6 @@ let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 set guicursor+=i:blinkwait0
 set cursorline " highlight line
 set ruler
-set relativenumber
-set number
 
 set showmatch
 set showcmd
@@ -68,7 +66,6 @@ set noswapfile
 set mouse=a "scroll vim in terminal
 
 " for trailing and spaces
-set list
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 "--------------------------------------------------------------------
