@@ -1,6 +1,6 @@
 "
 "----------------------------------------------------------------------
-" Basics 
+" Basics
 set nocompatible
 
 syntax on
@@ -9,7 +9,7 @@ set autoread " autoload files after edit, but it doesnt check periodically
 set viminfo^=% " remember last time edit place
 
 " Appearance
-colorscheme Tomorrow-Night-Eighties 
+colorscheme Tomorrow-Night-Eighties
 set term=screen-256color
 set shortmess=atI " 取消乌干达
 set showmode "display current mode
@@ -32,7 +32,7 @@ set textwidth=0
 set encoding=utf-8
 
 set hidden "allow buffer switching without saving
-set nowrap " don't wrap line 
+set wrap " wrap line
 set foldenable
 set foldlevel=99
 
@@ -104,7 +104,7 @@ inoremap <special> <Esc> <Esc>hl
 inoremap jj <ESC>
 
 " yank to the end of the line
-nnoremap Y y$  
+nnoremap Y y$
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " movements
