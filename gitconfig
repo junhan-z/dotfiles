@@ -2,9 +2,6 @@
 	editor = vim
 	excludesfile = /Users/junhan/.gitignore_global
 	pager = less -FMRiX
-[user]
-	email = junhanoct@gmail.com
-	name = Junhan
 [color]
 	ui = true
 [alias]
