@@ -9,7 +9,7 @@ set autoread " autoload files after edit, but it doesnt check periodically
 set viminfo^=% " remember last time edit place
 
 " Appearance
-colorscheme Tomorrow-Night-Eighties
+colorscheme jellybeans
 set term=screen-256color
 set shortmess=atI " 取消乌干达
 set showmode "display current mode

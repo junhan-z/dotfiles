@@ -32,7 +32,7 @@ Plug 'hail2u/vim-css3-syntax'
 
 " NERDTree and git plugins
 Plug 'scrooloose/nerdtree'
-map <C-n> :NERDTreeToggle<CR>
+map <F2> :NERDTreeToggle<CR>
 
 " Edit Nav
 Plug 'terryma/vim-multiple-cursors'
