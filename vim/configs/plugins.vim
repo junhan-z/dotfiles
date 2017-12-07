@@ -18,6 +18,7 @@ let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 Plug 'szorfein/darkest-space'
 Plug 'nightsense/office'
+Plug 'joshdick/onedark.vim'
 
 " Javascripts
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }

@@ -12,6 +12,7 @@ endif
 
 source ~/.vim/configs/basics.vim
 source ~/.vim/configs/plugins.vim
+colorscheme onedark
 
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
