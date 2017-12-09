@@ -15,6 +15,8 @@ source ~/.vim/configs/plugins.vim
 
 " if used in terminal, remember to set the
 " terminal colorscheme to be solarized too
+
+set background=dark
 colorscheme solarized
 
 nnoremap <leader>ev :split $MYVIMRC<cr>
