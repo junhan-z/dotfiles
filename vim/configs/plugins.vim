@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 "Swag
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='base16'
+let g:airline_theme='solarized'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -16,9 +16,7 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-Plug 'szorfein/darkest-space'
-Plug 'nightsense/office'
-Plug 'joshdick/onedark.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " Javascripts
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
