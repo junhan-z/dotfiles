@@ -35,7 +35,7 @@ map <F2> :NERDTreeToggle<CR>
 
 " Edit Nav
 Plug 'terryma/vim-multiple-cursors'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'honza/vim-snippets'
 
 " 对齐
 Plug 'junegunn/vim-easy-align'
