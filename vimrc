@@ -17,7 +17,7 @@ source ~/.vim/configs/plugins.vim
 " terminal colorscheme to be solarized too
 
 set background=dark
-colorscheme solarized
+colorscheme Tomorrow-Night-Eighties
 
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
