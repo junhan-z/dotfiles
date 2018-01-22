@@ -17,6 +17,7 @@ let g:airline#extensions#tabline#right_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 Plug 'altercation/vim-colors-solarized'
+Plug 'mhartington/oceanic-next'
 
 " Javascripts
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
@@ -25,6 +26,7 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 
 " HTML
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'php'] }
+let g:user_emmet_mode='n'    "only enable normal mode functions.
 
 " CSS
 Plug 'hail2u/vim-css3-syntax' 
