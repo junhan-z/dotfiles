@@ -47,7 +47,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 "fuzzy serach"
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.local/bin/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 nmap ; :Buffers<CR>
 nmap <Leader>f :Files<CR>
