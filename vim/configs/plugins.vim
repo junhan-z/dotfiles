@@ -24,6 +24,10 @@ Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 
+" Python
+Plug 'hdima/python-syntax'
+let python_highlight_all = 1
+
 " HTML
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'php'] }
 let g:user_emmet_mode='n'    "only enable normal mode functions.
