@@ -3,6 +3,9 @@ if empty(glob("~/.vim/autoload/plug.vim"))
     execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
+source ~/.vim/configs/basics.vim
+source ~/.vim/configs/plugins.vim
+
 " atomake- prefix is for my personal machines
 let hostname=system('hostname -s')
 if hostname !~ '^[Aa]tomake.*'
@@ -10,10 +13,8 @@ if hostname !~ '^[Aa]tomake.*'
   source ~/nahnuj/work_config.vim
 endif
 
-source ~/.vim/configs/basics.vim
-source ~/.vim/configs/plugins.vim
 
-" if used in terminal, remember to set the
+" if use solorized in terminal, remember to set the
 " terminal colorscheme to be solarized too
 
 set background=dark
