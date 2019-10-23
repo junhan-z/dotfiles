@@ -23,7 +23,7 @@ let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 set guicursor+=i:blinkwait0
 set cursorline " highlight line
 set ruler
-
+set cc=80 " colorcolumn: mark the right column 
 set showmatch
 set showcmd
 
