@@ -24,6 +24,9 @@ set guicursor+=i:blinkwait0
 set cursorline " highlight line
 set ruler
 set cc=80 " colorcolumn: mark the right column 
+" I don't use set number, but do need some margin to the left
+set foldcolumn=1
+
 set showmatch
 set showcmd
 
