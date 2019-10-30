@@ -6,16 +6,12 @@ endif
 source ~/.vim/configs/basics.vim
 source ~/.vim/configs/plugins.vim
 
-" atomake- prefix is for my personal machines
+" N/nahnuj- prefix is for my personal machines
 let hostname=system('hostname -s')
-if hostname !~ '^[Aa]tomake.*'
+if hostname !~ '^[Nn]ahnuj.*'
   echom join(['Work Mode! Import work configs for', hostname],' ')
   source ~/nahnuj/work_config.vim
 endif
-
-
-" if use solorized in terminal, remember to set the
-" terminal colorscheme to be solarized too
 
 set background=dark
 colorscheme Tomorrow-Night-Eighties

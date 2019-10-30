@@ -30,6 +30,11 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 " Python
 Plug 'hdima/python-syntax'
 let python_highlight_all = 1
+Plug 'nvie/vim-flake8'
+autocmd FileType python map <buffer> <F3> :call flake8#Flake8()<CR>
+
+" Jinja
+Plug 'lepture/vim-jinja'
 
 " HTML
 Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'php'] }
@@ -67,6 +72,7 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_console_startup = 0
 
 " Auto-Complete
+"let g:loaded_youcompleteme = 1 " Disable YCM
 Plug 'Valloric/YouCompleteMe', {'do': './install.py' }
 
 " The Silver Searcher

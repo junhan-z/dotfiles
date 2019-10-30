@@ -1,5 +1,8 @@
 **/classes
 .gitignore
-.DS_Store
+*.DS_Store
 **/*.swp
 !~/.gitignore
+__pycache__/
+*.pyc
+*.pya
