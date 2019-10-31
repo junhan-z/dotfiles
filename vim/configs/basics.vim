@@ -138,6 +138,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Track old files
+nnoremap bo :browse oldfiles<CR>
+
 " Functions
 
 nnoremap <silent> <c-a> :call TogglePaste()<cr>
