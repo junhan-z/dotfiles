@@ -14,7 +14,7 @@ if hostname !~ '^[Nn]ahnuj.*'
 endif
 
 set background=dark
-colorscheme Tomorrow-Night-Eighties
+colorscheme Nord
 
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
