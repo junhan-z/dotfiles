@@ -47,11 +47,6 @@ set ignorecase " ignore case in search
 set smartcase
 set nospell
 
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
 "autoindent essentially tells vim to apply the indentation of the current line
 "to the next (created by pressing enter in insert mode or with O or o in
 "normal mode.
