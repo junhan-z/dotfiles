@@ -60,11 +60,10 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 "fuzzy serach"
-Plug 'junegunn/fzf', { 'dir': '~/.local/bin/fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-nmap ; :Buffers<CR>
-nmap <Leader>f :Files<CR>
-nmap <Leader>r :Tags<CR>
+" install.sh is for C extension, which is faster
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+nmap ; :LeaderfBuffer<CR>
+nmap <Leader>f :LeaderfFile<CR>
 
 " File Nav
 Plug 'Xuyuanp/nerdtree-git-plugin'
