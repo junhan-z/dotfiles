@@ -64,6 +64,9 @@ nmap ga <Plug>(EasyAlign)
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 nmap ; :LeaderfBuffer<CR>
 nmap <Leader>f :LeaderfFile<CR>
+let g:Lf_WindowPosition = 'bottom'
+let g:Lf_ShowDevIcons = 0
+let g:Lf_DevIconsFont = 'Mono'
 
 " File Nav
 Plug 'Xuyuanp/nerdtree-git-plugin'
