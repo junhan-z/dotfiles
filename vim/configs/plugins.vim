@@ -16,8 +16,6 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-Plug 'altercation/vim-colors-solarized'
-Plug 'mhartington/oceanic-next'
 Plug 'arcticicestudio/nord-vim'
 
 "Ale for linting
@@ -44,14 +42,6 @@ let g:user_emmet_mode='n'    "only enable normal mode functions.
 " CSS
 Plug 'hail2u/vim-css3-syntax' 
 
-" NERDTree and git plugins
-Plug 'scrooloose/nerdtree'
-map <F2> :NERDTreeToggle<CR>
-
-" Edit Nav
-Plug 'terryma/vim-multiple-cursors'
-Plug 'honza/vim-snippets'
-
 " 对齐
 Plug 'junegunn/vim-easy-align'
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -66,13 +56,7 @@ nmap ; :LeaderfBuffer<CR>
 nmap <Leader>f :LeaderfFile<CR>
 let g:Lf_WindowPosition = 'bottom'
 let g:Lf_ShowDevIcons = 0
-let g:Lf_DevIconsFont = 'Mono'
-
-" File Nav
-Plug 'Xuyuanp/nerdtree-git-plugin'
-" 保持nerdtree一致
-let g:nerdtree_tabs_open_on_gui_startup = 0
-let g:nerdtree_tabs_open_on_console_startup = 0
+let g:Lf_DevIconsFont = 'DejaVuSansMono Nerd Font Mono'
 
 " Auto-Complete
 "let g:loaded_youcompleteme = 1 " Disable YCM
@@ -94,15 +78,6 @@ nnoremap <leader>t :TlistToggle<cr>
 let Tlist_Show_One_File=1 " always show taglist of one file
 let Tlist_Use_Right_Window = 1 " make taglist on the right
 let Tlist_WinWidth=40
-
-"Plug 'vim-scripts/Visual-Mark'
-"Plug 'vim-scripts/ShowMarks'
-"let showmarks_enable=1
-"" Ignore help, quickfix, non-modifiable buffers
-"let showmarks_ignore_type = "hqm"
-"" Hilight lower & upper marks
-"let showmarks_hlline_lower = 1
-"let showmarks_hlline_upper = 1
 
 call plug#end()
 
