@@ -1,6 +1,6 @@
 NEWLINE=$'\n'
 PROMPT='%{$fg_bold[yellow]%}%2~%{$reset_color%} $(git_prompt_info)'
-PROMPT+=" %{$fg[grey]%}[%W %T]@%M${NEWLINE}"
+PROMPT+="%{$fg[blue]%}@%m %{$fg[grey]%}[%W %T]${NEWLINE}"
 PROMPT+="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$reset_color%}"
 
 
