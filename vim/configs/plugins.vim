@@ -54,10 +54,12 @@ nmap <Leader>f :LeaderfFile<CR>
 let g:Lf_WindowPosition = 'bottom'
 let g:Lf_ShowDevIcons = 0
 let g:Lf_DevIconsFont = 'DejaVuSansMono Nerd Font Mono'
+" refresh cache: https://github.com/Yggdroot/LeaderF/issues/161
+let g:Lf_UseCache = 0
+let g:Lf_UseMemoryCache = 0
 
 " Auto-Complete
-"let g:loaded_youcompleteme = 1 " Disable YCM
-Plug 'Valloric/YouCompleteMe', {'do': './install.py' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " The Silver Searcher
 if executable('ag')
