@@ -4,16 +4,6 @@
 	pager = less -FMRiX
 [color]
 	ui = true
-[alias]
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	lg = log --oneline --graph --decorate
-	lg20 = log --oneline --graph --decorate --max-count=20
-	lga = log --oneline --graph --decorate --all
-	d = difftool
-	diffc = diff --cached
 [credential]
 	helper = osxkeychain
 [diff]
