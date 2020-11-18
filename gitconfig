@@ -10,3 +10,5 @@
 	tool = vimdiff3
 [difftool]
 	prompt = false
+[user]
+	email = z@junhan.xyz
