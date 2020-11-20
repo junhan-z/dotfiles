@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/junhan/.oh-my-zsh"
+export ZSH="/home/junhan/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -130,9 +130,18 @@ export WORKON_HOME='~/.virtualenvs'
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export PATH=$PATH:/usr/local/opt/rabbitmq/sbin
 export PATH="/usr/local/sbin:$PATH"
-source /usr/local/bin/virtualenvwrapper.sh
+
+# Ubuntu 17.04 and after
+if [ -f ~/.local/bin/virtualenvwrapper.sh ]; then
+	VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+	source ~/.local/bin/virtualenvwrapper.sh
+fi
 
 # Must place at the last line lol
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
