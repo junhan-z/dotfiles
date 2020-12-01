@@ -13,6 +13,7 @@ set term=screen-256color
 set shortmess=atI " 取消乌干达
 set showmode "display current mode
 set title " change the terminal title
+set guifont=Monaco:h14
 
 " change cursor behavior between main mode and insert mode
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
