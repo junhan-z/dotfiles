@@ -130,7 +130,7 @@ export WORKON_HOME='~/.virtualenvs'
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 export PATH=$PATH:/usr/local/opt/rabbitmq/sbin
 export PATH="/usr/local/sbin:$PATH"
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # Must place at the last line lol
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
