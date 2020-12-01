@@ -1,7 +1,7 @@
 .netrwhist
-vim/autoload
-vim/plugged
+configs/vim/autoload
+configs/vim/plugged
 
-tmux/*
+configs/tmux/*
 
 bin
