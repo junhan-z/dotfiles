@@ -23,6 +23,26 @@ setup_color() {
   fi
 }
 
+info() {
+  msg=$1
+  echo "${BLUE}$msg${RESET}"
+}
+
+act() {
+  msg=$1
+  echo "${BOLD}$msg${RESET}"
+}
+
+warn() {
+  msg=$1
+  echo "${YELLOW}$msg${RESET}"
+}
+
+error() {
+  msg=$1
+  echo "${RED}$msg${RESET}"
+}
+
 check_omz() {
   # must go first as some ENVs depends on this
   if [[ -z "$ZSH" ]]; then
@@ -36,16 +56,16 @@ check_omz() {
 copy_config_files() {
   CONFIGS=($(ls "$DOTFILES_PATH/configs"))
 
-  echo "${BLUE}Create symbol links...${RESET}"
+  info "Create symbol links"
   for f in "${CONFIGS[@]}"
   do
     local FROM="$DOTFILES_PATH/configs/$f"
     local TO="$INSTALL_PATH/.$f"
 
     if test -e "$TO"; then
-      echo "$TO already exists..."
-      echo "${RED}[Remove]${RESET} $TO..."
-      # rm $TO
+      echo "$TO already exists"
+      echo "${RED}[Remove]${RESET} $TO"
+      rm $TO
     fi
     echo "${GREEN}[Create]${RESET} $TO -> $FROM"
     # TODO: it behaves a bit differently when symbol link a directory
@@ -56,40 +76,82 @@ copy_config_files() {
 }
 
 copy_theme() {
-  echo "${GREEN}[Copy]${RESET} Nahnuj theme to $ZSH/themes..."
+  info "Add a custom theme"
+  act "[Copy] Nahnuj theme to $ZSH/themes"
   cp $DOTFILES_PATH/nahnuj.zsh-theme $ZSH/themes
   echo
 }
 
 install_plugins() {
-  echo "${BLUE}Install a couple oh-my-zsh plugins...${RESET}"
+  info "Install a couple oh-my-zsh plugins"
   local ZSH_PLUGINS_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
   local PLUGINS=("zsh-syntax-highlighting" "zsh-autosuggestions")
 
   for p in ${PLUGINS[@]}; do
+    info "* $p"
     if [[ -d "$ZSH_PLUGINS_DIR/$p" ]]; then
-      echo "${GREEN}[Skip]${RESET} $p exist..."
+      act "[Skip] Installed"
     else
-      echo "${BLUE}[Install]${RESET} $p"
+      act "[Install] $p"
       git clone https://github.com/zsh-users/$p.git $ZSH_PLUGINS_DIR/$p
     fi
   done
+  echo
 }
 
-install_tools() {
+install_fzf() {
+  info "* fzf"
   if ! [[ -e ~/.fzf ]]; then
-    echo "${BLUE}[Install]${RESET} fzf..."
+    echo "${BLUE}[Install]${RESET} fzf"
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
   else
-    echo "${GREEN}[Skip]${RESET} fzf exist..."
+    act "[Skip] Installed"
+  fi
+}
+
+check_command() {
+  local command=$1
+  info "* $command"
+  if ! command -v $command &> /dev/null
+  then
+    warn "Not found $command, attempt to install now..."
+    return 1
+  else
+    act "[Skip] Installed"
   fi
 
-  echo "${BLUE}Install PIP3...${RESET}"
+}
 
-  echo "${BLUE}Install virtualenv...${RESET}"
+install_pip3() {
+  check_command "pip3"
+  if [ $? -ne 0 ]; then
+    act "[Install] pip3"
+    # TODO: add command here
+  fi
 
+}
 
+install_virtualenv() {
+  check_command "virtualenv"
+  if [ $? -ne 0 ]; then
+    act "[Install] virtualenv"
+    sudo pip3 install virtualenv
+  fi
+
+  check_command "virtualenvwrapper"
+  if [ $? -ne 0 ]; then
+    act "[Install] virtualenvwrapper"
+    sudo -H pip3 install virtualenv
+  fi
+}
+
+install_tools() {
+  info "Install a couple frequently used tools"
+
+  install_fzf
+  install_pip3
+  install_virtualenv
 }
 
 
@@ -102,15 +164,13 @@ main() {
     return 1
   fi
 
-  copy_config_files
+  # TODO: uncomment when release
+  #copy_config_files
   copy_theme
-
   # oh-my-zsh only
   install_plugins
-
   # other stuffs
   install_tools
-
 }
 
 main "$@"
