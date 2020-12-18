@@ -53,18 +53,18 @@ check_omz() {
   return 0
 }
 
-copy_config_files() {
+link_config_files() {
   CONFIGS=($(ls "$DOTFILES_PATH/configs"))
 
-  info "Create symbol links"
+  info "Create symbol links."
   for f in "${CONFIGS[@]}"
   do
     local FROM="$DOTFILES_PATH/configs/$f"
     local TO="$INSTALL_PATH/.$f"
 
     if test -e "$TO"; then
-      echo "$TO already exists"
-      echo "${RED}[Remove]${RESET} $TO"
+      warn "$TO already exists."
+      warn "[Remove] $TO."
       rm $TO
     fi
     echo "${GREEN}[Create]${RESET} $TO -> $FROM"
@@ -75,10 +75,19 @@ copy_config_files() {
 
 }
 
-copy_theme() {
+link_theme() {
   info "Add a custom theme"
-  act "[Copy] Nahnuj theme to $ZSH/themes"
-  cp $DOTFILES_PATH/nahnuj.zsh-theme $ZSH/themes
+  local FROM="$DOTFILES_PATH/nahnuj.zsh-theme"
+  local TO="$INSTALL_PATH/.oh-my-zsh/themes/nahnuj.zsh-theme"
+
+  if test -e "$TO"; then
+    warn "$TO already exists."
+    warn "[Remove] $TO."
+    rm $TO
+  fi
+
+  act "[Link] Nahnuj theme to $ZSH/themes"
+  ln -s "$FROM" "$TO"
   echo
 }
 
@@ -164,9 +173,8 @@ main() {
     return 1
   fi
 
-  # TODO: uncomment when release
-  #copy_config_files
-  copy_theme
+  link_config_files
+  link_theme
   # oh-my-zsh only
   install_plugins
   # other stuffs
