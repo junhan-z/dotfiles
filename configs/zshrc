@@ -137,3 +137,8 @@ export PATH="/usr/local/sbin:$PATH"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+
+alias ibrew="arch -x86_64 /usr/local/bin/brew" # Homebrew on Rosetta2
+
+# Homebrew on the M1, where things install to /opt/homebrew
+export PATH=/opt/homebrew/bin:$PATH
