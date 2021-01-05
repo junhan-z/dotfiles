@@ -105,9 +105,6 @@ export VISUAL=vim
 # used for vimrc
 HOSTNAME=$(hostname)
 
-# Brew python path
-export PATH=/usr/local/opt/python/libexec/bin:$PATH
-
 # Keybindings
 bindkey -v
 export KEYTIMEOUT=1
@@ -129,20 +126,24 @@ bindkey '^e' end-of-line
 
 export WORKON_HOME='~/.virtualenvs'
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-export PATH=$PATH:/usr/local/opt/rabbitmq/sbin
-export PATH="/usr/local/sbin:$PATH"
 # source /usr/local/bin/virtualenvwrapper.sh
 
 # Must place at the last line lol
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
 alias ibrew="arch -x86_64 /usr/local/bin/brew" # Homebrew on Rosetta2
-
-# Homebrew on the M1, where things install to /opt/homebrew
-export PATH=/opt/homebrew/bin:$PATH
 
 # readline for compilers, maybe used when run Ruby bundle
 export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
+
+# Brew python path
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
+
+# Homebrew on the M1, where things install to /opt/homebrew
+export PATH=/opt/homebrew/bin:$PATH
+
+export PATH=$PATH:/usr/local/opt/rabbitmq/sbin
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
