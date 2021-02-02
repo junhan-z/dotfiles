@@ -4,16 +4,17 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Swag
+" Themes
+" Plug 'arcticicestudio/nord-vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+
 Plug 'vim-airline/vim-airline'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='nord'
-
-Plug 'arcticicestudio/nord-vim'
+let g:airline_theme='onehalfdark'
 
 "Ale for linting
 Plug 'w0rp/ale'
@@ -69,6 +70,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
+" Hacklang
 Plug 'hhvm/vim-hack'
 Plug 'tpope/vim-surround'
 
