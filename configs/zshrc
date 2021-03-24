@@ -63,7 +63,6 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
-  shrink-path
 )
 
 source $ZSH/oh-my-zsh.sh
