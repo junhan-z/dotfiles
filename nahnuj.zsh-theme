@@ -16,13 +16,13 @@ show_path() {
 
 show_cpu_arch() {
   arch_name="$(uname -m)"
+
   colored_arch_name="%{$fg[yellow]%}${arch_name}"
 
   if [ "${arch_name}" = "x86_64" ]; then
     colored_arch_name="%{$fg[green]%}${arch_name}"
   fi
 
-  BRACKET_FG="015"
   brackets $colored_arch_name
 }
 
@@ -47,13 +47,13 @@ arrow_end() {
 }
 
 ok() {
-  echo "%{$fg_bold[green]%}>"
+  echo "└%{$fg_bold[green]%}>"
 }
 
 error() {
-  echo "%{$fg_bold[red]%}x"
+  echo "└%{$fg_bold[red]%}x"
 }
 
-PROMPT="$(show_path) | "
+PROMPT="┌$(show_path) | "
 PROMPT+="$(show_cpu_arch)-$(show_hostname)-$(show_time)${NEWLINE}"
 PROMPT+="%(?:$(ok) :$(error) )%{$reset_color%}"
