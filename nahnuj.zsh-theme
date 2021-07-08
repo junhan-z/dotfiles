@@ -18,9 +18,8 @@ show_cpu_arch() {
   arch_name="$(uname -m)"
 
   colored_arch_name="%{$fg[yellow]%}${arch_name}"
-
   if [ "${arch_name}" = "x86_64" ]; then
-    colored_arch_name="%{$fg[green]%}${arch_name}"
+    colored_arch_name="%{$fg[cyan]%}${arch_name}"
   fi
 
   brackets $colored_arch_name
