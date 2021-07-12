@@ -74,13 +74,10 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 "autocmds
 "
 au FileType python,coffee set tabstop=4 shiftwidth=4 expandtab ai
-au FileType haskell,puppet,ruby,php,html,css,xml,js set tabstop=2 shiftwidth=2 expandtab ai
-
-au FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 au FileType python,ruby,bash nnoremap <buffer> <localleader>c I#<esc>
-
+au FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+au FileType haskell,puppet,ruby,php,html,css,xml,js,javascript set tabstop=2 shiftwidth=2 expandtab ai
 au FileType php :iabbrev <buffer> iff if ()<left>
-
 au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 
 au BufNewFile,BufRead *.zsh-theme set filetype=zsh-theme

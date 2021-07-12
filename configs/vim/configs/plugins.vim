@@ -20,9 +20,7 @@ let g:airline_theme='onehalfdark'
 Plug 'w0rp/ale'
 
 " Javascripts
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'jelera/vim-javascript-syntax'
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'maxmellon/vim-jsx-pretty'
 
 " Python
 Plug 'hdima/python-syntax'
