@@ -5,9 +5,12 @@ NEWLINE=$'\n'
 # defualt bracket color: gray
 BRACKET_FG="240"
 
+# curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash
+# to show colors
+
 brackets() {
   # wrap a pair of gray brackets around the text
-  echo -e "%{$FG[${BRACKET_FG}]%}[${1}%{$FG[${BRACKET_FG}]%}]%{$reset_color%}"
+  echo -e "%{$FG[${BRACKET_FG}]%}[%{$FG[${TEXT_FG}]%}${1}%{$FG[${BRACKET_FG}]%}]%{$reset_color%}"
 }
 
 show_path() {
@@ -53,6 +56,22 @@ error() {
   echo "└%{$fg_bold[red]%}x"
 }
 
-PROMPT="┌$(show_path) | "
+# company-wise scripts
+gcert_status() {
+  if which gcertstatus > /dev/null; then
+    gcertstatus > /dev/null;
+    retVal=$?
+
+    if [ $retVal -ne 0 ]; then
+      TEXT_FG="009"
+      brackets "Need Gcert"
+    else
+      TEXT_FG="010"
+      brackets "G"
+    fi
+  fi
+}
+
+PROMPT="┌$(show_path)$(gcert_status) | "
 PROMPT+="$(show_cpu_arch)-$(show_hostname)-$(show_time)${NEWLINE}"
 PROMPT+="%(?:$(ok) :$(error) )%{$reset_color%}"
