@@ -74,10 +74,10 @@ export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
 
 # Brew python path
 alias ibrew="arch -x86_64 /usr/local/bin/brew" # Homebrew on Rosetta2
-export PATH=/usr/local/opt/python/libexec/bin:$PATH
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 # Homebrew on the M1, where things install to /opt/homebrew
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=$PATH:/usr/local/opt/rabbitmq/sbin
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 
