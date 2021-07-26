@@ -1,31 +1,45 @@
 setopt prompt_subst
 
+color_by_number() {
+  number=${1}
+  echo "%{$FG[${number}]%}"
+}
+
+color_by_name() {
+  name=${1}
+  echo "%{$fg[${name}]%}"
+}
+
 NEWLINE=$'\n'
 
 # defualt bracket color: gray
-BRACKET_FG="240"
+BRACKET_COLOR=$(color_by_number "240")
+TEXT_COLOR=$(color_by_name "gray")
+RESET_COLOR="%{$reset_color%}"
 
 # curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash
 # to show colors
 
 brackets() {
   # wrap a pair of gray brackets around the text
-  echo -e "%{$FG[${BRACKET_FG}]%}[%{$FG[${TEXT_FG}]%}${1}%{$FG[${BRACKET_FG}]%}]%{$reset_color%}"
+  echo -e "${BRACKET_COLOR}[${TEXT_COLOR}${1}${BRACKET_COLOR}]${RESET_COLOR}"
 }
 
+# prompt components
+
 show_path() {
-  brackets "%{$fg_bold[blue]%}%(4~|/../%2~|%~)"
+  TEXT_COLOR=$(color_by_name "white")
+  brackets "%(4~|/../%2~|%~)"
 }
 
 show_cpu_arch() {
+  TEXT_COLOR=$(color_by_name "yellow")
   arch_name="$(uname -m)"
-
-  colored_arch_name="%{$fg[yellow]%}${arch_name}"
   if [ "${arch_name}" = "x86_64" ]; then
-    colored_arch_name="%{$fg[cyan]%}${arch_name}"
+    TEXT_COLOR=$(color_by_name "cyan")
   fi
 
-  brackets $colored_arch_name
+  brackets $arch_name
 }
 
 show_hostname() {
@@ -49,29 +63,9 @@ arrow_end() {
 }
 
 ok() {
-  echo "└%{$fg_bold[green]%}>"
+  echo "└$(color_by_name 'green')>"
 }
 
 error() {
-  echo "└%{$fg_bold[red]%}x"
+  echo "└$(color_by_name 'red')x"
 }
-
-# company-wise scripts
-gcert_status() {
-  if which gcertstatus > /dev/null; then
-    gcertstatus > /dev/null;
-    retVal=$?
-
-    if [ $retVal -ne 0 ]; then
-      TEXT_FG="009"
-      brackets "Need Gcert"
-    else
-      TEXT_FG="010"
-      brackets "G"
-    fi
-  fi
-}
-
-PROMPT="┌$(show_path)$(gcert_status) | "
-PROMPT+="$(show_cpu_arch)-$(show_hostname)-$(show_time)${NEWLINE}"
-PROMPT+="%(?:$(ok) :$(error) )%{$reset_color%}"
