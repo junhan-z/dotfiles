@@ -82,6 +82,7 @@ build_symbol_link() {
 
 link_config_files() {
   CONFIGS=($(ls "$DOTFILES_PATH/configs"))
+  local select_files=$1
 
   info "Create symbol links."
   for f in "${CONFIGS[@]}"
@@ -89,7 +90,14 @@ link_config_files() {
     local FROM="$DOTFILES_PATH/configs/$f"
     local TO="$INSTALL_PATH/.$f"
 
-    build_symbol_link ${FROM} ${TO}
+    if [ ${select_files} = "all" ]; then
+      build_symbol_link ${FROM} ${TO}
+    elif [ $select_files = "select" ]; then
+      ask "  - Link ${f}?"
+      if [ $? -eq 1 ]; then
+        build_symbol_link ${FROM} ${TO}
+      fi
+    fi
   done
 
 }
@@ -186,17 +194,21 @@ main() {
 
   ask "Link all the config files?"
   if [ $? -eq 1 ]; then
-    link_config_files
+    link_config_files "all"
   else 
-    ask "  - Link selected files?"
+    ask "  - OK! Only Link selected files then?"
     if [ $? -eq 1 ]; then 
-      link_config_files "select"
+      link_config_files "select" 
+    else
+      info "Skip linking files..."
     fi
   fi
 
-  ask "Would like to try the nahnuj theme? :p"
+  ask "Would you like to try my 'nahnuj' theme? :p"
   if [ $? -eq 1 ]; then
     link_theme
+  else
+    info "Sad to see you leave, try it next time!"
   fi
 
   # oh-my-zsh only
