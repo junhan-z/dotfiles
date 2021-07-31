@@ -69,3 +69,23 @@ ok() {
 error() {
   echo "└$(color_by_name 'red')x"
 }
+
+# company-wise scripts
+gcert_status() {
+  if which gcertstatus > /dev/null; then
+    gcertstatus > /dev/null;
+    retVal=$?
+
+    if [ $retVal -ne 0 ]; then
+      TEXT_FG="009"
+      brackets "Need Gcert"
+    else
+      TEXT_FG="010"
+      brackets "G"
+    fi
+  fi
+}
+
+PROMPT="┌$(show_path)$(gcert_status) | "
+PROMPT+="$(show_cpu_arch)-$(show_hostname)-$(show_time)${NEWLINE}"
+PROMPT+="%(?:$(ok) :$(error) )%{$reset_color%}"
