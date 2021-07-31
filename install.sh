@@ -23,34 +23,61 @@ setup_color() {
   fi
 }
 
+colored_print() {
+  color=$1
+  msg=$2
+  printf "${color}${msg}${RESET}"
+}
+
 info() {
-  msg=$1
-  echo "${BLUE}$msg${RESET}"
+  colored_print ${BLUE} "$1\n"
 }
 
 act() {
-  msg=$1
-  echo "${BOLD}$msg${RESET}"
+  colored_print ${BOLD} "$1\n"
 }
 
 warn() {
-  msg=$1
-  echo "${YELLOW}$msg${RESET}"
+  colored_print ${YELLOW} "$1\n"
 }
 
 error() {
-  msg=$1
-  echo "${RED}$msg${RESET}"
+  colored_print ${RED}${BOLD} "$1\n"
+}
+
+ask() {
+  vared -p "${BOLD}$1${RESET} [Y/n]: " -c ans
+  if [[ ${ans} =~ ^[Yy]$ ]]; then
+    return 1
+  elif [[ ${ans} =~ ^[Nn]$ ]]; then
+    return 0
+  fi
+
+  return 1
 }
 
 check_omz() {
   # must go first as some ENVs depends on this
   if [[ -z "$ZSH" ]]; then
-    echo "${BOLD}${RED}install.sh relies on oh-my-zsh${RESET}"
-    echo "Go to ${BOLD}${GREEN}https://ohmyz.sh/#install${RESET} to install."
+    error "install.sh relies on oh-my-zsh\n"
+    act "Go to ${BOLD}${GREEN}https://ohmyz.sh/#install${RESET} and install oh-my-zsh before continue."
     return 1
   fi
   return 0
+}
+
+build_symbol_link() {
+	local src_file=$1
+	local dst_file=$2
+	
+	if test -e "$dst_file"; then
+		warn "${dst_file} already exists."
+		warn "[Remove] ${dst_file}."
+		rm ${dst_file}
+	fi
+	# TODO: it behaves a bit differently when symbol link a directory
+	ln -s "${src_file}" "${dst_file}"
+	act "[Create] $TO -> $FROM.\n"
 }
 
 link_config_files() {
@@ -62,15 +89,7 @@ link_config_files() {
     local FROM="$DOTFILES_PATH/configs/$f"
     local TO="$INSTALL_PATH/.$f"
 
-    if test -e "$TO"; then
-      warn "$TO already exists."
-      warn "[Remove] $TO."
-      rm $TO
-    fi
-    echo "${GREEN}[Create]${RESET} $TO -> $FROM"
-    # TODO: it behaves a bit differently when symbol link a directory
-    ln -s "$FROM" "$TO"
-    echo
+    build_symbol_link ${FROM} ${TO}
   done
 
 }
@@ -80,15 +99,7 @@ link_theme() {
   local FROM="$DOTFILES_PATH/nahnuj.zsh-theme"
   local TO="$INSTALL_PATH/.oh-my-zsh/themes/nahnuj.zsh-theme"
 
-  if test -e "$TO"; then
-    warn "$TO already exists."
-    warn "[Remove] $TO."
-    rm $TO
-  fi
-
-  act "[Link] Nahnuj theme to $ZSH/themes"
-  ln -s "$FROM" "$TO"
-  echo
+  build_symbol_link ${FROM} ${TO}
 }
 
 install_plugins() {
@@ -165,20 +176,40 @@ install_tools() {
 
 
 main() {
-  echo "run from: $DOTFILES_PATH"
-  echo "install to: $INSTALL_PATH"
+  info "run from: $DOTFILES_PATH"
+  info "install to: $INSTALL_PATH"
 
   setup_color
   if ! check_omz; then
     return 1
   fi
 
-  link_config_files
-  link_theme
+  ask "Link all the config files?"
+  if [ $? -eq 1 ]; then
+    link_config_files
+  else 
+    ask "  - Link selected files?"
+    if [ $? -eq 1 ]; then 
+      link_config_files "select"
+    fi
+  fi
+
+  ask "Would like to try the nahnuj theme? :p"
+  if [ $? -eq 1 ]; then
+    link_theme
+  fi
+
   # oh-my-zsh only
-  install_plugins
+  ask "Install oh-my-zsh plugins?"
+  if [ $? -eq 1 ]; then
+    install_plugins
+  fi
+
   # other stuffs
-  install_tools
+  ask "Install frequently used tools?"
+  if [ $? -eq 1 ]; then
+    install_tools
+  fi
 }
 
 main "$@"
