@@ -12,3 +12,5 @@
 	prompt = false
 [user]
 	email = z@junhan.xyz
+[init]
+	defaultBranch = main
