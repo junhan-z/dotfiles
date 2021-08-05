@@ -28,7 +28,7 @@ brackets() {
 # prompt components
 
 show_path() {
-  TEXT_COLOR=$(color_by_name "white")
+  TEXT_COLOR=$(color_by_name "red")
   brackets "%(4~|/../%2~|%~)"
 }
 
@@ -77,10 +77,10 @@ gcert_status() {
     retVal=$?
 
     if [ $retVal -ne 0 ]; then
-      TEXT_FG="009"
+      TEXT_COLOR=$(color_by_name "yellow")
       brackets "Need Gcert"
     else
-      TEXT_FG="010"
+      TEXT_COLOR=$(color_by_name "green")
       brackets "G"
     fi
   fi
