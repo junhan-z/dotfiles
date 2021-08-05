@@ -14,7 +14,7 @@ if hostname !~ '^[Nn]ahnuj.*'
 endif
 
 set background=dark
-colorscheme onehalfdark
+colorscheme Tomorrow-Night-Eighties
 
 " Indicate different mode
 if exists ('$TMUX')
