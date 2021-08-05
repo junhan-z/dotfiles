@@ -7,14 +7,17 @@ color_by_number() {
 
 color_by_name() {
   name=${1}
-  echo "%{$fg[${name}]%}"
+  font=${2}
+  if [ "${font}" = "bold" ]; then
+    echo "%{$fg_bold[${name}]%}"
+  else
+    echo "%{$fg[${name}]%}"
+  fi
 }
 
 NEWLINE=$'\n'
-
-# defualt bracket color: gray
 BRACKET_COLOR=$(color_by_number "240")
-TEXT_COLOR=$(color_by_name "gray")
+TEXT_COLOR=$(color_by_number "240")
 RESET_COLOR="%{$reset_color%}"
 
 # curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash
@@ -28,12 +31,16 @@ brackets() {
 # prompt components
 
 show_path() {
-  TEXT_COLOR=$(color_by_name "red")
+  TEXT_COLOR=$(color_by_name "blue" "bold")
   brackets "%(4~|/../%2~|%~)"
 }
 
+# show_jobs() {
+#   brackets "%jjobs"
+# }
+
 show_cpu_arch() {
-  TEXT_COLOR=$(color_by_name "yellow")
+  TEXT_COLOR=$(color_by_name "yellow" "bold")
   arch_name="$(uname -m)"
   if [ "${arch_name}" = "x86_64" ]; then
     TEXT_COLOR=$(color_by_name "cyan")
@@ -70,7 +77,7 @@ error() {
   echo "└$(color_by_name 'red')x"
 }
 
-# company-wise scripts
+# some useful indicators
 gcert_status() {
   if which gcertstatus > /dev/null; then
     gcertstatus > /dev/null;
