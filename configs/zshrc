@@ -72,6 +72,23 @@ bindkey '^e' end-of-line
 export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
 
+
+# ENV extensions
+# Python: virtualenv
+export WORKON_HOME='~/.virtualenvs'
+VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+
+# Ruby: rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# Javascript: nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Rosetta2
 # Brew python path
 alias ibrew="arch -x86_64 /usr/local/bin/brew" # Homebrew on Rosetta2
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
@@ -81,16 +98,5 @@ export PATH="/usr/local/opt/rabbitmq/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 
-# ENV extensions
-# Python: virtualenv
-export WORKON_HOME='~/.virtualenvs'
-VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
-
-# Ruby: rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-# Javascript: nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# zsh 
+alias zsh64="arch -x86_64 zsh"
