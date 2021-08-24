@@ -1,32 +1,35 @@
-"
-"----------------------------------------------------------------------
 " Basics
 set nocompatible
 
 syntax on
+set number
 set history=1000
 set autoread " autoload files after edit, but it doesnt check periodically
 set viminfo^=% " remember last time edit place
 
 " Appearance
-set term=screen-256color
+colorscheme Tomorrow-Night-Eighties
+set background=dark
 set shortmess=atI " 取消乌干达
 set showmode "display current mode
 set title " change the terminal title
 set guifont=Monaco:h14
 
-" change cursor behavior between main mode and insert mode
-let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" Indicate different mode
+if exists ('$TMUX')
+  let &t_SI.="\e[5 q" "SI = INSERT mode
+  let &t_SR.="\e[4 q" "SR = REPLACE mode
+  let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " don't blink the cursor
 set guicursor+=i:blinkwait0
 set cursorline " highlight line
 set ruler
 set cc=80 " colorcolumn: mark the right column 
-" I don't use set number, but do need some margin to the left
-set foldcolumn=1
 
 set showmatch
 set showcmd
@@ -73,15 +76,11 @@ nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :noh
 "--------------------------------------------------------------------
 "autocmds
 "
-au FileType python,coffee set tabstop=4 shiftwidth=4 expandtab ai
-au FileType python,ruby,bash nnoremap <buffer> <localleader>c I#<esc>
-au FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-au FileType haskell,puppet,ruby,php,html,css,xml,js,javascript set tabstop=2 shiftwidth=2 expandtab ai
-au FileType php :iabbrev <buffer> iff if ()<left>
 au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
-
 au BufNewFile,BufRead *.zsh-theme set filetype=zsh-theme
 au BufNewFile,BufRead *.zsh-theme set syntax=zsh
+au BufNewFile,BufRead *.md set filetype=markdown
+au FileType coffee,ruby,yaml setlocal shiftwidth=2 tabstop=2
 
 "--------------------------------------------------------------------
 " key bindings

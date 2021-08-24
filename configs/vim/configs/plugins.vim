@@ -1,5 +1,10 @@
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
 if empty(glob("~/.vim/plugged"))
-    execute '!mkdir -p ~/.vim/plugged'
+  execute '!mkdir -p ~/.vim/plugged'
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -7,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 " Themes
 " Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'arcticicestudio/nord-vim'
 
 Plug 'vim-airline/vim-airline'
 if !exists('g:airline_symbols')
@@ -36,7 +42,8 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript', 'javascript.jsx', 'php']
 let g:user_emmet_mode='n'    "only enable normal mode functions.
 
 " CSS
-Plug 'hail2u/vim-css3-syntax' 
+"Plug 'hail2u/vim-css3-syntax' 
+Plug 'groenewege/vim-less'
 
 " 对齐
 Plug 'junegunn/vim-easy-align'
