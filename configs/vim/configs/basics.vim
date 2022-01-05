@@ -80,6 +80,7 @@ au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 au BufNewFile,BufRead *.zsh-theme set filetype=zsh-theme
 au BufNewFile,BufRead *.zsh-theme set syntax=zsh
 au BufNewFile,BufRead *.md set filetype=markdown
+au BufNewFile,BufRead *.mdx set filetype=markdown
 au FileType coffee,ruby,yaml setlocal shiftwidth=2 tabstop=2
 
 "--------------------------------------------------------------------
