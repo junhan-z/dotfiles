@@ -39,7 +39,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
 export EDITOR=vim
 export VISUAL=vim
 
@@ -100,3 +99,10 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 # zsh 
 alias zsh64="arch -x86_64 zsh"
+
+# flutter
+export PATH="$HOME/Documents/flutter/bin:$PATH"
+
+# tmux
+alias tmux="tmux -u" # use UTF-8 in tmux to support powerline
+
