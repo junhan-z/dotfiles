@@ -17,15 +17,15 @@ Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 # Git
 function gloga { git log --all --oneline --graph }
 function gst { git status }
-function gc { git commit }
+function gd { git diff }
+function gdca { git diff --cached }
 
 ###################################################
-# Note: Keep it at the bottom, otherwise it fails #
+# Note: Keep fzf at the bottom, otherwise it fails #
 # Somehow :(                                      #
 ###################################################
-
 # fzf
 # installation
 # Install-Module -Name PSFzf -Scope CurrentUser -Force 
 Import-Module PSFzf
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PsFzfOption -PSReadlineChordReverseHistory 'Ctrl+r'
