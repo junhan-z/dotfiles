@@ -3,7 +3,7 @@
 
 # Import-Module posh-git
 Import-Module oh-my-posh
-Set-PoshPrompt atomic
+Set-PoshPrompt bubbles
 
 # PSReadline
 Set-PSReadLineOption -EditMode Emacs
