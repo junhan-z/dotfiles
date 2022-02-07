@@ -2,11 +2,10 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-eval "$(oh-my-posh --init --shell zsh --config  $(brew --prefix oh-my-posh)/themes/paradox.omp.json)"
+eval "$(oh-my-posh --init --shell zsh --config  $(brew --prefix oh-my-posh)/themes/hunk.omp.json)"
 
 ZSH_DISABLE_COMPFIX=True
 export ZSH="$HOME/.oh-my-zsh"
-# ZSH_THEME="nahnuj"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
