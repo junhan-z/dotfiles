@@ -146,7 +146,7 @@
           "properties": {
             "postfix": " \u276F",
             "prefix": "",
-            "template": "{{ .UserName }}"
+            "template": "{{ .HostName }}"
           }
         }
       ]
