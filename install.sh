@@ -102,10 +102,19 @@ link_config_files() {
 
 }
 
-link_theme() {
-  info "Add a custom theme"
-  local FROM="$DOTFILES_PATH/nahnuj.zsh-theme"
-  local TO="$INSTALL_PATH/.oh-my-zsh/themes/nahnuj.zsh-theme"
+# link_omz_theme() {
+#   info "Add a customized omz theme"
+#   local FROM="$DOTFILES_PATH/themes/nahnuj.zsh-theme"
+#   local TO="$INSTALL_PATH/.oh-my-zsh/themes/nahnuj.zsh-theme"
+# 
+#   build_symbol_link ${FROM} ${TO}
+# }
+
+link_omp_theme() {
+  info "Add a customized omp theme"
+  mkdir -p "$INSTALL_PATH/.omp-theme/"
+  local FROM="$DOTFILES_PATH/themes/nahnuj.omp.json"
+  local TO="$INSTALL_PATH/.omp-theme/nahnuj.omp.json"
 
   build_symbol_link ${FROM} ${TO}
 }
@@ -206,7 +215,7 @@ main() {
 
   ask "Would you like to try my 'nahnuj' theme? :p"
   if [ $? -eq 1 ]; then
-    link_theme
+    link_omp_theme
   else
     info "Sad to see you leave, try it next time!"
   fi
