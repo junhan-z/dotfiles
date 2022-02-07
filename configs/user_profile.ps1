@@ -3,7 +3,8 @@
 
 # Import-Module posh-git
 Import-Module oh-my-posh
-oh-my-posh --init --shell pwsh --config $HOME/Documents/dotfiles/themes/nahnuj.omp.json | Invoke-Expression
+Set-PoshPrompt Paradox
+# oh-my-posh --init --shell pwsh --config $HOME/Documents/dotfiles/themes/nahnuj.omp.json | Invoke-Expression
 
 # PSReadline
 Set-PSReadLineOption -EditMode Emacs
