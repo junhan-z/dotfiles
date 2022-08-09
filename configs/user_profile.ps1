@@ -3,8 +3,8 @@
 
 # Import-Module posh-git
 Import-Module oh-my-posh
-Set-PoshPrompt hunk
-# oh-my-posh --init --shell pwsh --config $HOME/Documents/dotfiles/themes/nahnuj.omp.json | Invoke-Expression
+Set-PoshPrompt clean-detailed
+# oh-my-posh --init --shell pwsh --config $HOME/Documents/dotfiles/themes/clean-detailed.omp.json | Invoke-Expression
 
 # PSReadline
 Set-PSReadLineOption -EditMode Emacs
