@@ -3,14 +3,13 @@
 
 # Path to your oh-my-zsh installation.
 # TODO: auto install oh-my-posh for Linux
+OMP_THEME_LOCAL=marcduiker
 case `uname` in
   Linux)
-  echo "OS type: Linux"
-  eval "$(oh-my-posh --init --shell zsh --config  ~/.poshthemes/paradox.omp.json)"
+  eval "$(oh-my-posh --init --shell zsh --config  ~/.poshthemes/$OMP_THEME_LOCAL.omp.json)"
   ;;
   Darwin)
-  echo "OS type: MacOS"
-  eval "$(oh-my-posh --init --shell zsh --config  $(brew --prefix oh-my-posh)/themes/paradox.omp.json)"
+  eval "$(oh-my-posh --init --shell zsh --config  $(brew --prefix oh-my-posh)/themes/$OMP_THEME_LOCAL.omp.json)"
   ;;
 esac
 
