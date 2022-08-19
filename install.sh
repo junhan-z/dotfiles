@@ -160,6 +160,18 @@ check_command() {
 
 }
 
+check_file() {
+  local file=$1
+  info "* Checking $file"
+  if [ -e $file ]
+  then
+    act "[Skip] ${file} exists"
+  else
+    warn "Not found $file, attempt to install now..."
+    return 1
+  fi
+}
+
 install_pip3() {
   check_command "pip3"
   if [ $? -ne 0 ]; then
@@ -183,12 +195,23 @@ install_virtualenv() {
   fi
 }
 
+install_tpm() {
+  TPM_DIR="$HOME/.tmux/plugins/tpm"
+  check_file $TPM_DIR
+  if [ $? -ne 0 ]; then
+    act "[Install] TPM (Tmux Pacakge Manager)"
+    git clone "https://github.com/tmux-plugins/tpm" $TPM_DIR
+  fi
+
+}
+
 install_tools() {
   info "Install a couple frequently used tools"
 
   install_fzf
   install_pip3
   install_virtualenv
+  install_tpm
 }
 
 
