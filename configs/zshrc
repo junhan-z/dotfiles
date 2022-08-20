@@ -83,11 +83,17 @@ bindkey '^e' end-of-line
 export LDFLAGS="-L/opt/homebrew/opt/readline/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/readline/include"
 
-
 # ENV extensions
 # Python: virtualenv
+case `uname` in
+  Linux)
+    VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+  ;;
+  Darwin)
+    VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+  ;;
+esac
 export WORKON_HOME='~/.virtualenvs'
-VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
 [ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
 # Ruby: rbenv

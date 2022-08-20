@@ -179,11 +179,13 @@ install_virtualenv() {
     act "[Install] virtualenv"
     sudo pip3 install virtualenv
   fi
+}
 
-  check_command "virtualenvwrapper"
+install_virtualenvwrapper() {
+  check_file "/usr/local/bin/virtualenvwrapper.sh"
   if [ $? -ne 0 ]; then
     act "[Install] virtualenvwrapper"
-    sudo -H pip3 install virtualenv
+    sudo -H pip3 install virtualenvwrapper
   fi
 }
 
@@ -203,6 +205,7 @@ install_tools() {
   install_fzf
   install_pip3
   install_virtualenv
+  install_virtualenvwrapper
   install_tpm
 }
 
