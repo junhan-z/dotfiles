@@ -127,3 +127,13 @@ export PATH="$HOME/Documents/flutter/bin:$PATH"
 # tmux
 alias tmux="tmux -u" # use UTF-8 in tmux to support powerline
 
+# WSL .local path
+export PATH="${HOME}/.local/bin:$PATH"
+if [ -f "$HOME/.ssh/github_token" ]
+then
+  echo "Adding github SSH token."
+  eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_token
+fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
