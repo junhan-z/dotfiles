@@ -3,7 +3,7 @@
 
 # Path to your oh-my-zsh installation.
 # TODO: auto install oh-my-posh for Linux
-OMP_THEME_LOCAL=marcduiker
+OMP_THEME_LOCAL="chips"
 case `uname` in
   Linux)
   eval "$(oh-my-posh --init --shell zsh --config  ~/.poshthemes/$OMP_THEME_LOCAL.omp.json)"
