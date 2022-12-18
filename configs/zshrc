@@ -137,3 +137,11 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+function update_git_config {
+  local name="Junhan"
+  local email="z@junhan.xyz"
+  git config user.name "${name}"
+  git config user.email "${email}"
+  echo "Updated:\nname: ${name}\nemail: ${email}"
+}
