@@ -15,7 +15,6 @@ esac
 
 ZSH_DISABLE_COMPFIX=True
 export ZSH="$HOME/.oh-my-zsh"
-
 export LANG=en_US.UTF-8
 
 # Set list of themes to load
@@ -133,6 +132,12 @@ if [ -f "$HOME/.ssh/github_token" ]
 then
   echo "Adding github SSH token."
   eval "$(ssh-agent -s)" && ssh-add ~/.ssh/github_token
+fi
+
+# WSL aliases
+# alias open, as if it's the MacOS, hence only applies it for WSL
+if uname -r | grep -q 'microsoft' && ! type "explorer.exe" > /dev/null; then
+  alias open="explorer.exe"
 fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
