@@ -13,6 +13,10 @@ call plug#begin('~/.vim/plugged')
 " Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'arcticicestudio/nord-vim'
+Plug 'ayu-theme/ayu-vim'
+set termguicolors     " enable true colors support
+let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
 
 Plug 'vim-airline/vim-airline'
 if !exists('g:airline_symbols')

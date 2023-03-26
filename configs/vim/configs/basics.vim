@@ -8,8 +8,8 @@ set autoread " autoload files after edit, but it doesnt check periodically
 set viminfo^=% " remember last time edit place
 
 " Appearance
-colorscheme Tomorrow-Night-Eighties
-set background=dark
+colorscheme Tomorrow
+set background=light
 set shortmess=atI " 取消乌干达
 set showmode "display current mode
 set title " change the terminal title
