@@ -150,3 +150,6 @@ function update_git_config {
   git config user.email "${email}"
   echo "Updated:\nname: ${name}\nemail: ${email}"
 }
+
+# Kubernets auto-complete
+if which kubectl > /dev/null; then source <(kubectl completion zsh); fi
