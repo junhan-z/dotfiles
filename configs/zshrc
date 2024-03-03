@@ -143,6 +143,8 @@ fi
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+PATH=~/.console-ninja/.bin:$PATH
+
 function update_git_config {
   local name="Junhan"
   local email="z@junhan.xyz"
