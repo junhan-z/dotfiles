@@ -3,7 +3,11 @@
 
 # Path to your oh-my-zsh installation.
 # TODO: auto install oh-my-posh for Linux
-OMP_THEME_LOCAL="chips"
+# OMP_THEME_LOCAL="chips"
+# OMP_THEME_LOCAL="jv_sitecorian"
+# OMP_THEME_LOCAL="multiverse-neon"
+OMP_THEME_LOCAL="tokyonight_storm"
+
 case `uname` in
   Linux)
   eval "$(oh-my-posh --init --shell zsh --config  ~/.poshthemes/$OMP_THEME_LOCAL.omp.json)"
