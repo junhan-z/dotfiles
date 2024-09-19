@@ -130,6 +130,9 @@ export PATH="$HOME/Documents/flutter/bin:$PATH"
 # tmux
 alias tmux="tmux -u" # use UTF-8 in tmux to support powerline
 
+# Git
+alias glo5="git log --oneline --decorate --graph -5"
+
 # WSL .local path
 export PATH="${HOME}/.local/bin:$PATH"
 if [ -f "$HOME/.ssh/github_token" ]
