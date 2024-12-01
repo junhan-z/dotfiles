@@ -6,7 +6,8 @@
 # OMP_THEME_LOCAL="chips"
 # OMP_THEME_LOCAL="jv_sitecorian"
 # OMP_THEME_LOCAL="multiverse-neon"
-OMP_THEME_LOCAL="tokyonight_storm"
+# OMP_THEME_LOCAL="tokyonight_storm"
+OMP_THEME_LOCAL="kushal"
 
 case `uname` in
   Linux)
