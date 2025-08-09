@@ -37,6 +37,9 @@ eval "$(fnm env)"
 
 PATH=~/.console-ninja/.bin:$PATH
 
+# yarn 
+export PATH="$(yarn global bin):$PATH"
+
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
