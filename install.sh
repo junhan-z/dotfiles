@@ -1,7 +1,45 @@
 #!/bin/bash
+#
+# Set up this dotfiles checkout on a new machine.
+#
+# Everything here is idempotent: re-running only touches what is actually
+# out of date, and anything it would clobber gets moved aside first rather
+# than deleted. Run with --yes for an unattended install.
 
-DOTFILES_PATH=$(pwd)
-INSTALL_PATH=$HOME
+set -euo pipefail
+
+# Resolve the repo from the script's own location, not the caller's cwd,
+# so `~/projects/dotfiles/install.sh` works from anywhere. BASH_SOURCE is
+# undefined under `zsh install.sh`, hence the $0 fallback.
+DOTFILES_PATH="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+INSTALL_PATH="$HOME"
+BACKUP_SUFFIX="backup.$(date +%Y%m%d%H%M%S)"
+
+ASSUME_YES=0
+
+usage() {
+  cat <<'EOF'
+Usage: ./install.sh [options]
+
+Options:
+  -y, --yes    Answer yes to every prompt (unattended install)
+  -h, --help   Show this message
+
+Steps are prompted individually; each one is safe to re-run. Files that
+would be overwritten are renamed to <name>.backup.<timestamp> instead.
+EOF
+}
+
+parse_args() {
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      -y|--yes)  ASSUME_YES=1 ;;
+      -h|--help) usage; exit 0 ;;
+      *)         echo "Unknown option: $1" >&2; usage >&2; exit 1 ;;
+    esac
+    shift
+  done
+}
 
 # borrowed from oh-my-zsh
 setup_color() {
@@ -24,240 +62,218 @@ setup_color() {
 }
 
 colored_print() {
-  color=$1
-  msg=$2
-  printf "${color}${msg}${RESET}"
+  printf "%s%b%s" "$1" "$2" "$RESET"
 }
 
-info() {
-  colored_print ${BLUE} "$1\n"
-}
+info() { colored_print "$BLUE" "$1\n"; }
+act()  { colored_print "$BOLD" "$1\n"; }
+warn() { colored_print "$YELLOW" "$1\n"; }
+error() { colored_print "${RED}${BOLD}" "$1\n" >&2; }
 
-act() {
-  colored_print ${BOLD} "$1\n"
-}
-
-warn() {
-  colored_print ${YELLOW} "$1\n"
-}
-
-error() {
-  colored_print ${RED}${BOLD} "$1\n"
-}
-
+# Returns 0 for yes, 1 for no -- the usual shell convention, so callers
+# read as `if ask "..."; then`. Defaults to yes on an empty answer.
 ask() {
-  vared -p "${BOLD}$1${RESET} [Y/n]: " -c ans
-  if [[ ${ans} =~ ^[Yy]$ ]]; then
-    return 1
-  elif [[ ${ans} =~ ^[Nn]$ ]]; then
+  local prompt="$1" ans=""
+
+  if [ "$ASSUME_YES" -eq 1 ]; then
+    act "$prompt [Y/n]: y"
     return 0
   fi
 
-  return 1
+  # No stdin (piped install) means nothing can be answered interactively.
+  if [ ! -t 0 ]; then
+    act "$prompt [Y/n]: y (no tty)"
+    return 0
+  fi
+
+  printf "%s%s%s [Y/n]: " "$BOLD" "$prompt" "$RESET"
+  read -r ans
+  case "$ans" in
+    [Nn]*) return 1 ;;
+    *)     return 0 ;;
+  esac
 }
 
-check_omz() {
-  # must go first as some ENVs depends on this
-  if [[ -z "$ZSH" ]]; then
-    error "install.sh relies on oh-my-zsh\n"
-    act "Go to ${BOLD}${GREEN}https://ohmyz.sh/#install${RESET} and install oh-my-zsh before continue."
+# Point dst at src. Skips when already correct, backs up whatever is in
+# the way otherwise. Handles directories, which plain `rm` does not.
+build_symbol_link() {
+  local src="$1" dst="$2"
+
+  if [ ! -e "$src" ]; then
+    error "[Error] source missing: $src"
     return 1
   fi
-  return 0
-}
 
-build_symbol_link() {
-	local src_file=$1
-	local dst_file=$2
-	
-	if test -e "$dst_file"; then
-		warn "${dst_file} already exists."
-		warn "[Remove] ${dst_file}."
-		rm ${dst_file}
-	fi
-	# TODO: it behaves a bit differently when symbol link a directory
-	ln -s "${src_file}" "${dst_file}"
-	act "[Create] $TO -> $FROM.\n"
+  if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$src" ]; then
+    act "[Skip]   $dst -> $src"
+    return 0
+  fi
+
+  # -e is false for a broken symlink, so test -L separately.
+  if [ -e "$dst" ] || [ -L "$dst" ]; then
+    warn "[Backup] $dst -> $dst.$BACKUP_SUFFIX"
+    mv "$dst" "$dst.$BACKUP_SUFFIX"
+  fi
+
+  mkdir -p "$(dirname "$dst")"
+  ln -s "$src" "$dst"
+  act "[Create] $dst -> $src"
 }
 
 link_config_files() {
-  CONFIGS=($(ls "$DOTFILES_PATH/configs"))
-  local select_files=$1
+  local select_files="$1" f name
 
   info "Create symbol links."
-  for f in "${CONFIGS[@]}"
-  do
-    local FROM="$DOTFILES_PATH/configs/$f"
-    local TO="$INSTALL_PATH/.$f"
+  # Glob rather than parse ls, so names with spaces survive.
+  for f in "$DOTFILES_PATH"/configs/*; do
+    name="$(basename "$f")"
 
-    if [ ${select_files} = "all" ]; then
-      build_symbol_link ${FROM} ${TO}
-    elif [ $select_files = "select" ]; then
-      ask "  - Link ${f}?"
-      if [ $? -eq 1 ]; then
-        build_symbol_link ${FROM} ${TO}
-      fi
+    if [ "$select_files" = "all" ]; then
+      build_symbol_link "$f" "$INSTALL_PATH/.$name"
+    elif ask "  - Link ${name}?"; then
+      build_symbol_link "$f" "$INSTALL_PATH/.$name"
     fi
   done
-
 }
 
-link_omp_theme() {
-  info "Add a customized omp theme"
-  mkdir -p "$INSTALL_PATH/.omp-theme/"
-  local FROM="$DOTFILES_PATH/themes/nahnuj.omp.json"
-  local TO="$INSTALL_PATH/.omp-theme/nahnuj.omp.json"
-
-  build_symbol_link ${FROM} ${TO}
+link_zsh_theme() {
+  info "Add the customized zsh theme"
+  # Only makes the theme available; zshrc still picks which one is active
+  # via ZSH_THEME, and currently that is robbyrussell.
+  build_symbol_link "$DOTFILES_PATH/themes/nahnuj.zsh-theme" \
+    "${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/themes/nahnuj.zsh-theme"
 }
 
 link_ghostty_config() {
   info "Link the ghostty config"
   # Kept out of configs/ because link_config_files maps every entry there to
   # ~/.<name>, and ghostty reads ~/.config/ghostty/config instead.
-  mkdir -p "$INSTALL_PATH/.config/ghostty/"
-  local FROM="$DOTFILES_PATH/ghostty/config"
-  local TO="$INSTALL_PATH/.config/ghostty/config"
+  build_symbol_link "$DOTFILES_PATH/ghostty/config" \
+    "$INSTALL_PATH/.config/ghostty/config"
+}
 
-  build_symbol_link ${FROM} ${TO}
+install_homebrew() {
+  if command -v brew >/dev/null 2>&1; then
+    act "[Skip]   homebrew installed"
+  else
+    act "[Install] homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  # A fresh Apple-silicon install is not on PATH until the shell is
+  # re-sourced, so make brew reachable for the rest of this run.
+  if ! command -v brew >/dev/null 2>&1 && [ -x /opt/homebrew/bin/brew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  fi
+}
+
+install_brew_bundle() {
+  if ! command -v brew >/dev/null 2>&1; then
+    warn "[Skip]   homebrew not available, cannot run brew bundle"
+    return 0
+  fi
+  info "Install everything in the Brewfile"
+  # A single unavailable formula should not abort the whole install.
+  brew bundle --file="$DOTFILES_PATH/Brewfile" || warn "brew bundle reported errors, continuing"
+}
+
+install_omz() {
+  if [ -d "${ZSH:-$HOME/.oh-my-zsh}" ]; then
+    act "[Skip]   oh-my-zsh installed"
+    return 0
+  fi
+  act "[Install] oh-my-zsh"
+  # Unattended, or its installer replaces .zshrc and starts a new shell,
+  # which would abandon the rest of this script.
+  RUNZSH=no KEEP_ZSHRC=yes sh -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 install_plugins() {
   info "Install a couple oh-my-zsh plugins"
-  local ZSH_PLUGINS_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
-  local PLUGINS=("zsh-syntax-highlighting" "zsh-autosuggestions")
+  local plugins_dir="${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins"
+  local plugins=("zsh-syntax-highlighting" "zsh-autosuggestions")
+  local p
 
-  for p in ${PLUGINS[@]}; do
-    info "* $p"
-    if [[ -d "$ZSH_PLUGINS_DIR/$p" ]]; then
-      act "[Skip] Installed"
+  for p in "${plugins[@]}"; do
+    if [ -d "$plugins_dir/$p" ]; then
+      act "[Skip]   $p"
     else
       act "[Install] $p"
-      git clone https://github.com/zsh-users/$p.git $ZSH_PLUGINS_DIR/$p
+      git clone --depth 1 "https://github.com/zsh-users/$p.git" "$plugins_dir/$p"
     fi
   done
-  echo
-}
-
-install_fzf() {
-  info "* fzf"
-  if ! [[ -e ~/.fzf ]]; then
-    echo "${BLUE}[Install]${RESET} fzf"
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-  else
-    act "[Skip] Installed"
-  fi
-}
-
-check_command() {
-  local command=$1
-  info "* $command"
-  if ! command -v $command &> /dev/null
-  then
-    warn "Not found $command, attempt to install now..."
-    return 1
-  else
-    act "[Skip] Installed"
-  fi
-
-}
-
-check_file() {
-  local file=$1
-  info "* Checking $file"
-  if [ -e $file ]
-  then
-    act "[Skip] ${file} exists"
-  else
-    warn "Not found $file, attempt to install now..."
-    return 1
-  fi
-}
-
-install_pip3() {
-  check_command "pip3"
-  if [ $? -ne 0 ]; then
-    act "[Install] pip3"
-    # TODO: add command here
-  fi
-
-}
-
-install_virtualenv() {
-  check_command "virtualenv"
-  if [ $? -ne 0 ]; then
-    act "[Install] virtualenv"
-    sudo pip3 install virtualenv
-  fi
-}
-
-install_virtualenvwrapper() {
-  check_file "/usr/local/bin/virtualenvwrapper.sh"
-  if [ $? -ne 0 ]; then
-    act "[Install] virtualenvwrapper"
-    sudo -H pip3 install virtualenvwrapper
-  fi
 }
 
 install_tpm() {
-  TPM_DIR="$HOME/.tmux/plugins/tpm"
-  check_file $TPM_DIR
-  if [ $? -ne 0 ]; then
-    act "[Install] TPM (Tmux Pacakge Manager)"
-    git clone "https://github.com/tmux-plugins/tpm" $TPM_DIR
+  local tpm_dir="$HOME/.tmux/plugins/tpm"
+  if [ -d "$tpm_dir" ]; then
+    act "[Skip]   tpm"
+  else
+    act "[Install] tpm (tmux plugin manager)"
+    git clone --depth 1 https://github.com/tmux-plugins/tpm "$tpm_dir"
   fi
-
 }
 
 install_tools() {
   info "Install a couple frequently used tools"
-
-  install_fzf
-  install_pip3
-  install_virtualenv
-  install_virtualenvwrapper
   install_tpm
 }
 
+doctor() {
+  info "Checking the commands zshrc expects"
+  local c
+  for c in git zsh tmux vim fzf fnm; do
+    if command -v "$c" >/dev/null 2>&1; then
+      act "  [ok]      $c"
+    else
+      warn "  [missing] $c"
+    fi
+  done
+}
 
 main() {
-  info "run from: $DOTFILES_PATH"
+  parse_args "$@"
+  setup_color
+
+  info "run from:   $DOTFILES_PATH"
   info "install to: $INSTALL_PATH"
 
-  setup_color
-  if ! check_omz; then
-    return 1
+  if ask "Install homebrew and everything in the Brewfile?"; then
+    install_homebrew
+    install_brew_bundle
   fi
 
-  ask "Link all the config files?"
-  if [ $? -eq 1 ]; then
+  if ask "Install oh-my-zsh?"; then
+    install_omz
+  fi
+
+  if ask "Link all the config files?"; then
     link_config_files "all"
-  else 
-    ask "  - OK! Only Link selected files then?"
-    if [ $? -eq 1 ]; then 
-      link_config_files "select" 
-    else
-      info "Skip linking files..."
-    fi
+  elif ask "  - OK! Only link selected files then?"; then
+    link_config_files "select"
+  else
+    info "Skip linking files..."
   fi
 
-  ask "Link the ghostty config?"
-  if [ $? -eq 1 ]; then
+  if ask "Link the ghostty config?"; then
     link_ghostty_config
   fi
 
-  # oh-my-zsh only
-  ask "Install oh-my-zsh plugins?"
-  if [ $? -eq 1 ]; then
+  if [ -d "${ZSH:-$HOME/.oh-my-zsh}" ] && ask "Link the custom zsh theme?"; then
+    link_zsh_theme
+  fi
+
+  if [ -d "${ZSH:-$HOME/.oh-my-zsh}" ] && ask "Install oh-my-zsh plugins?"; then
     install_plugins
   fi
 
-  # other stuffs
-  ask "Install frequently used tools?"
-  if [ $? -eq 1 ]; then
+  if ask "Install frequently used tools?"; then
     install_tools
   fi
+
+  doctor
+  info "Done. Open a new shell, or: exec zsh"
 }
 
 main "$@"
