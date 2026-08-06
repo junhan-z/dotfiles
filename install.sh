@@ -111,6 +111,17 @@ link_omp_theme() {
   build_symbol_link ${FROM} ${TO}
 }
 
+link_ghostty_config() {
+  info "Link the ghostty config"
+  # Kept out of configs/ because link_config_files maps every entry there to
+  # ~/.<name>, and ghostty reads ~/.config/ghostty/config instead.
+  mkdir -p "$INSTALL_PATH/.config/ghostty/"
+  local FROM="$DOTFILES_PATH/ghostty/config"
+  local TO="$INSTALL_PATH/.config/ghostty/config"
+
+  build_symbol_link ${FROM} ${TO}
+}
+
 install_plugins() {
   info "Install a couple oh-my-zsh plugins"
   local ZSH_PLUGINS_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
@@ -229,6 +240,11 @@ main() {
     else
       info "Skip linking files..."
     fi
+  fi
+
+  ask "Link the ghostty config?"
+  if [ $? -eq 1 ]; then
+    link_ghostty_config
   fi
 
   # oh-my-zsh only
