@@ -11,11 +11,20 @@ theme = Nord
 font-family = JetBrains Mono
 font-size = 16
 
-# Window
+# Window. padding-balance splits the leftover row/column space evenly
+# instead of dumping it all at the bottom right.
 window-padding-x = 8
 window-padding-y = 6
+window-padding-balance = true
 window-save-state = always
 macos-titlebar-style = tabs
+
+# Default is srgb, which leaves the Nord palette looking washed out on a
+# wide-gamut display.
+window-colorspace = display-p3
+
+# The dimensions overlay on every resize is noise once the padding is set.
+resize-overlay = never
 
 # Send Option as Meta instead of composing accented characters, so
 # alt-based word motions reach zsh and vim.
@@ -32,8 +41,28 @@ confirm-close-surface = false
 # zsh integration. The feature list is additive against the defaults, so
 # turning one off takes an explicit no- prefix. "no-cursor" keeps
 # cursor-style above authoritative instead of letting the shell drive it.
+#
+# ssh-terminfo installs the xterm-ghostty entry on the remote host the
+# first time we connect, which is what keeps TERM working over ssh.
+# ssh-env is the fallback for hosts we cannot write to: it downgrades
+# TERM to xterm-256color for that session rather than sending an entry
+# the host does not have.
 shell-integration = zsh
-shell-integration-features = no-cursor,sudo,title
+shell-integration-features = no-cursor,sudo,title,ssh-terminfo,ssh-env
 
-# Ghostty sets TERM=xterm-ghostty. Hosts without that terminfo entry need:
-#   infocmp -x | ssh HOST -- tic -x -
+# Global drop-down terminal. macOS asks for Accessibility permission the
+# first time a global: binding is registered.
+keybind = global:super+grave_accent=toggle_quick_terminal
+quick-terminal-position = top
+
+# Installed via the homebrew cask, so let brew own upgrades rather than
+# having Ghostty's own updater fight it.
+auto-update = off
+
+# App icon. The frame material only applies under custom-style; the
+# official icon ignores it. Ghost and screen colors are pulled from the
+# Nord palette above so the icon matches the terminal.
+macos-icon = custom-style
+macos-icon-frame = beige
+macos-icon-ghost-color = #eceff4
+macos-icon-screen-color = #2e3440
