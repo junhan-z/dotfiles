@@ -47,7 +47,7 @@ source <(fzf --zsh)
 alias tmux="tmux -u" # use UTF-8 in tmux to support powerline
 
 # Git
-alias gll="git log --oneline --decorate --graph -5"
+alias gll="git log --oneline --decorate -5"
 
 # functions
 function update_git_config {
@@ -57,3 +57,13 @@ function update_git_config {
   git config user.email "${email}"
   echo "Updated:\nname: ${name}\nemail: ${email}"
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# flutterfire_cli
+export PATH="$PATH":"$HOME/.pub-cache/bin"
