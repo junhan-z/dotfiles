@@ -17,7 +17,12 @@ window-padding-x = 8
 window-padding-y = 6
 window-padding-balance = true
 window-save-state = always
-macos-titlebar-style = tabs
+
+# transparent, not tabs: the tabs style draws its own titlebar and packs
+# the tab bar into that single row, so on a narrow window the tabs
+# collide with the new-tab button. transparent keeps the native tab bar
+# on its own row and still tints the titlebar to the terminal background.
+macos-titlebar-style = transparent
 
 # Default is srgb, which leaves the Nord palette looking washed out on a
 # wide-gamut display.
