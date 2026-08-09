@@ -3,7 +3,7 @@
 # Reference the full default set with: ghostty +show-config --default --docs
 
 # Nord, to match configs/tmux.conf
-theme = Nord
+theme = Nord Light
 
 # JetBrains Mono ships inside Ghostty, so this needs no font install.
 # Powerline glyphs in the tmux status bar come from the bundled
