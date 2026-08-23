@@ -57,7 +57,7 @@ shell-integration-features = no-cursor,sudo,title,ssh-terminfo,ssh-env
 
 # Global drop-down terminal. macOS asks for Accessibility permission the
 # first time a global: binding is registered.
-keybind = global:super+grave_accent=toggle_quick_terminal
+keybind = global:super+backslash=toggle_quick_terminal
 quick-terminal-position = top
 
 # Installed via the homebrew cask, so let brew own upgrades rather than
