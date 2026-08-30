@@ -49,6 +49,9 @@ alias tmux="tmux -u" # use UTF-8 in tmux to support powerline
 # Git
 alias gll="git log --oneline --decorate -5"
 
+# snaptrade
+alias st="snaptrade"
+
 # functions
 function update_git_config {
   local name="Junhan"
